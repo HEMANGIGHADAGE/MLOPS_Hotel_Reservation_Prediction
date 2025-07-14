@@ -3,3 +3,4 @@ mlruns/
 logs/
 Mlops_project1.egg-info/
 fabled-emissary-464811-e5-be7a56940c8a.json/
+fabled-emissary-*.json
