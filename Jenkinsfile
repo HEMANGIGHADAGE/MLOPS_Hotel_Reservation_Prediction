@@ -66,7 +66,7 @@ pipeline{
                           --image=gcr.io/${GCP_PROJECT}/mlops-hotel-reservation:latest \
                           --platform=managed \
                           --region=us-central1 \
-                          --allow=unauthenticated
+                          --allow-unauthenticated
                         
 
                         '''
