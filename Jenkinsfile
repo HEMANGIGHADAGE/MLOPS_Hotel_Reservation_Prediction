@@ -52,5 +52,27 @@ pipeline{
                 }
                 }
             }
+        stage('Deploy to Cloudrun')
+        {
+            steps{
+                withCredentials([file(credentialsId : 'gcp-service-account-key', variable : 'GOOGLE_APPLICATION_CREDENTIALS')]){
+                    script{
+                        echo 'Deploy to Cloudrun'
+                        sh '''
+                        export PATH=$PATH{GCLOUD_PATH}
+                        gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
+                        gcloud config set project ${GCP_PROJECT}
+                        gcloud run deploy mlops-hotel-reservation \
+                          --image=gcr.io/${GCP_PROJECT}/mlops-hotel-reservation:latest \
+                          --platform=managed \
+                          --region=us-central1 \
+                          --allow=unauthenticated
+                        
+
+                        '''
+                    }
+                }
+                }
+            }
         }
     }
